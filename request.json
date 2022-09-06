@@ -1,0 +1,32 @@
+{
+  "Калининград": {
+    "uid": "9843e2fd-7675-4219-a134-04a3532985ae",
+    "plus_koff": 4,
+    "multiplication_koff": 2,
+    "division_koff": 0.3
+  },
+  "Томск": {
+    "uid": "515a6cb8-d5ca-4962-92a2-9d5c25788028",
+    "plus_koff": 3,
+    "multiplication_koff": 7,
+    "division_koff": 0.1
+  },
+  "Санкт-Петербург": {
+    "uid": "7b424971-afc9-4bd7-b2fa-4676aad9b855",
+    "plus_koff": 3,
+    "multiplication_koff": 7,
+    "division_koff": 0.1
+  },
+  "Москва": {
+    "uid": "66463c2b-ddd8-464a-a262-a6bc4a881294",
+    "plus_koff": 5,
+    "multiplication_koff": 2,
+    "division_koff": 0.8
+  },
+  "based": {
+    "uid": "c5c9ea6e-1d50-4ccf-a363-e940b67ca60f",
+    "plus_koff": 8,
+    "multiplication_koff": 11,
+    "division_koff": 0.4
+  }
+}
