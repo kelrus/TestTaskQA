@@ -1,4 +1,4 @@
-{
+[
   "Калининград": {
     "uid": "9843e2fd-7675-4219-a134-04a3532985ae",
     "plus_koff": 4,
@@ -29,4 +29,4 @@
     "multiplication_koff": 11,
     "division_koff": 0.4
   }
-}
+]
