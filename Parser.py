@@ -7,7 +7,7 @@ import json
 #и записи их в файл json
 def generator_test_cases():
     #Считываем тело json файла с тарифами
-    with open('json/db.json', 'r', encoding='utf8') as readfile:
+    with open('db.json', 'r', encoding='utf8') as readfile:
         data = json.load(readfile)
 
     cases = {}
