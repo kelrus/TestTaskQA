@@ -9,6 +9,7 @@ def emulation_request(request):
     result = {
         "result": 500
     }
+
     tarifs = []
     for item in data:
         tarifs.append(item)
@@ -17,15 +18,15 @@ def emulation_request(request):
     sum = request['sum']
 
     if TarifCalculation.is_tariff_exists(tarif, tarifs):
-        plus_koff = data[tarif]['plus_koff']
-        multiplication_koff = data[tarif]['multiplication_koff']
-        division_koff = data[tarif]['division_koff']
-        result["result"] = TarifCalculation.tarif_calc(sum, plus_koff, multiplication_koff, division_koff)
+        plusKoff = data[tarif]['plus_koff']
+        multiplicationKoff = data[tarif]['multiplication_koff']
+        divisionKoff = data[tarif]['division_koff']
+        result["result"] = TarifCalculation.tarif_calc(sum, plusKoff, multiplicationKoff, divisionKoff)
     else:
-        plus_koff = data['based']['plus_koff']
-        multiplication_koff = data['based']['multiplication_koff']
-        division_koff = data['based']['division_koff']
-        result["result"] = TarifCalculation.tarif_calc(sum, plus_koff, multiplication_koff, division_koff)
+        plusKoff = data['based']['plus_koff']
+        multiplicationKoff = data['based']['multiplication_koff']
+        divisionKoff = data['based']['division_koff']
+        result["result"] = TarifCalculation.tarif_calc(sum, plusKoff, multiplicationKoff, divisionKoff)
 
     return result
 
