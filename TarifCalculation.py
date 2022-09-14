@@ -1,7 +1,6 @@
 
-
 def tarif_calc(sum, plusKoff, multiplicationKoff, divisionKoff):
-    result = sum + plusKoff + multiplicationKoff * divisionKoff
+    result = round(sum + plusKoff + multiplicationKoff * divisionKoff, 2)
     return result
 
 requestUrl = "https://my-json-server.typicode.com/kelrus/TestTaskQA/db"
