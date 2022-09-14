@@ -1,6 +1,7 @@
 import TarifCalculation
 import json
 
+__sumCase = [10, 9999, 0, 0.1, 45.242421, 452343242323]
 
 #функция для считывания тарифа из json файла,
 #автоматического формирования тест-кейсов
@@ -13,17 +14,17 @@ def generator_test_cases():
     cases = {}
     cases['cases'] = []
     tarifs = get_tarifs(data)
-    sum = 10000
 
     #Функция автоматического формирования тест-кейсов
     #Тест кейс - это структура запроса + ожидаемый результат.
     for tarif in data:
-        #Формируем запрос
-        request  = req_generation_function(tarif, sum)
-        #Получаем ожидаем результат для этого запроса
-        expectedResult = res_generation_function(tarif, sum, TarifCalculation.is_tariff_exists(tarif, tarifs), data)
-        testCase = (request, expectedResult)
-        cases['cases'].append(testCase)
+        for sum in __sumCase:
+            #Формируем запрос
+            request  = req_generation_function(tarif, sum)
+            #Получаем ожидаем результат для этого запроса
+            expectedResult = res_generation_function(tarif, sum, TarifCalculation.is_tariff_exists(tarif, tarifs), data)
+            testCase = (request, expectedResult)
+            cases['cases'].append(testCase)
 
     #Запись получеенных тест-кейсов в json файл
     with open('json/TestCases.json', 'w', encoding='utf8') as outfile:
@@ -75,7 +76,6 @@ def get_tarifs(data):
 
 #Функция для получения тест кейсов и отправки их на тесты
 def get_test_cases():
-    generator_test_cases()
 
     with open('json/TestCases.json', 'r', encoding='utf8') as readfile:
         casesjson = json.load(readfile)
@@ -86,3 +86,7 @@ def get_test_cases():
 
 
     return testCases
+
+
+#При запуске parser генерирует тест-кейсы
+generator_test_cases()
