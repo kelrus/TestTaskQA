@@ -1,7 +1,10 @@
 import TarifCalculation
 import json
+import random
 
-__sumCase = [10, 9999, 0, 0.1, 45.242421, 452343242323]
+minSum = 0
+maxSum = 999999999
+noTarifsCity = ['Aljir', 'паhyа', 'vdgddl', 'Город']
 
 #функция для считывания тарифа из json файла,
 #автоматического формирования тест-кейсов
@@ -11,24 +14,45 @@ def generator_test_cases():
     with open('db.json', 'r', encoding='utf8') as readfile:
         data = json.load(readfile)
 
+
     cases = {}
     cases['cases'] = []
-    tarifs = get_tarifs(data)
 
-    #Функция автоматического формирования тест-кейсов
+    #Существующие города с тарифами
+    tarifs = get_tarifs(data)
+    #Города для теста с тарифами и без
+    cities = get_cities(tarifs)
+
+    #Функция автоматического формирования тест-кейсов на основе json файла
     #Тест кейс - это структура запроса + ожидаемый результат.
-    for tarif in data:
-        for sum in __sumCase:
-            #Формируем запрос
-            request  = req_generation_function(tarif, sum)
-            #Получаем ожидаем результат для этого запроса
-            expectedResult = res_generation_function(tarif, sum, TarifCalculation.is_tariff_exists(tarif, tarifs), data)
-            testCase = (request, expectedResult)
-            cases['cases'].append(testCase)
+    for tarif in cities:
+        # Формируем запрос
+        sum = round(random.uniform(minSum, maxSum), 2)
+        request = req_generation_function(tarif, sum)
+
+        #Получаем ожидаем результат для этого запроса
+        expectedResult = res_generation_function(tarif, sum, TarifCalculation.is_tariff_exists(tarif, tarifs), data)
+        testCase = (request, expectedResult)
+        cases['cases'].append(testCase)
+
 
     #Запись получеенных тест-кейсов в json файл
     with open('json/TestCases.json', 'w', encoding='utf8') as outfile:
         json.dump(cases, outfile, indent=2, ensure_ascii=False)
+
+
+#Функция получения списка всех гордов для тест кейса
+#Получает на вход существующие города с тарифами, добавляет туда несуществующие тарифы и
+#выдаёт полный список городов для формирования запросов
+def get_cities(cities):
+    new_cites = []
+
+    for city in cities:
+        new_cites.append(city)
+    for city in noTarifsCity:
+        new_cites.append(city)
+
+    return new_cites
 
 #Функцию формирования тела запроса на основе тарифа
 def req_generation_function(city, sum):
